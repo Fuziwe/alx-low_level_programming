@@ -1,19 +1,19 @@
-#include "main.h"
-#include <stdio.h>
-/**
- * main - check the code
- * Return: Always 0.
+/*
+ * File: 1-alphabet.c
+ * Auth: Fuziwe Baliso
  */
-int main(void)
+
+#include "holberton.h"
+
+/**
+ * print_alphabet - prints the alphabet in lowercase, followed by a new line.
+ */
+void print_alphabet(void)
 {
-	char c;
+	char letter;
 
-	c = '0';
+	for (letter = 'a'; letter <= 'z'; letter++)
+		_putchar(letter);
 
-	printf("%c: %d\n", c, _isdigit(c));
-
-	c = 'a';
-	printf("%c: %d\n", c, _isdigit(c));
-	return (0);
-
+	_putchar('\n');
 }
