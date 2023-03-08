@@ -1,30 +1,60 @@
-#include "holberton.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-/**
- * wildcmp - compares two strings and returns 1 if the strings
- * can be considered identical, otherwise return 0.
- * @s1: string to compare to
- * @s2: string with wild character
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+#define MAXLENGTH 31
+
+/*
+  calculate the length of the string
  */
-int wildcmp(char *s1, char *s2)
+int get_string_length(char *str);
+
+/*
+  return 1 if it is palindrome
+  return 0 if it is not palindrome
+ */
+int is_palindrome(char *str);
+
+int main(int argc, char *argv[])
 {
-	if (*s1 == '\0' && *s2 == '\0')
-		return (1);
+    char input_string[MAXLENGTH];
 
-	if (*s1 == *s2)
-		return (wildcmp(s1 + 1, s2 + 1));
+    // get user input
+    printf("Enter a string to test: ");
+    scanf("%s", input_string);
 
-	if (*s2 == '*')
-	{
-		if (*s2 == '*' && *(s2 + 1) != '\0' && *s1 == '\0')
-			return (0);
-		if (wildcmp(s1, s2 + 1) || wildcmp(s1 + 1, s2))
-			return (1);
-	}
+    if(is_palindrome(input_string)) {
+        printf("%s is a palindrome\n", input_string);
+    } else {
+        printf("%s is not a palindrome\n", input_string);
+    }
 
-	return (0);
+    return 0;
 }
 
+int get_string_length(char *str)
+{
+    int length = 0;
+    // if it is not '\0' keep moving
+    while(*str != '\0') {
+        str++;
+        length++;
+    }
+    return length;
+}
+
+int is_palindrome(char *str)
+{
+    char *head = str;
+    int length = get_string_length(str);
+    char *tail = &str[length - 1];
+
+    // two pointers to check palindrome and no spare space is being used
+    while(head < tail) {
+        if(*head != *tail) {
+            return 0;
+        }
+        head++;
+        tail--;
+    }
+    return 1;
+}
